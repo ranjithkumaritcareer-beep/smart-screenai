@@ -1,0 +1,6 @@
+{
+  "name": "SmartScreen AI",
+  "description": "AI-Powered Internship Screening & Candidate Ranking System for college placement cells.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
