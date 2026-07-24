@@ -76,129 +76,163 @@ Parsing — Backend sends the resume file to the parsing service, which extracts
 Matching & Scoring — The extracted profile and the JD are passed to the AI matching module, which computes a similarity/eligibility score (0–100) and generates a short recommendation (e.g., "Strong match — meets all criteria" or "Below CGPA cutoff").
 Ranking — All candidates for a drive are sorted by score; those above the configurable threshold are auto-tagged Shortlisted, others Rejected.
 Review — Placement officer views the ranked list on the dashboard, can open any resume, see the AI's reasoning, and override any decision manually.
-Notification — Students see their updated status (Shortlisted/Rejected/Under Review) on their portal.
-📁 Folder Structure
-
-
-
+Notification — Students see their updated status (Shortlisted/Rejected/Under Review) on their portal
+✨ Key Features
+👨‍🎓 Student Portal
+Secure Login
+Resume Upload (PDF)
+ATS Score
+Eligibility Percentage
+Missing Skills Analysis
+Resume History
+Voice AI Assistant
+Application Status Tracking
+👨‍💼 Placement Officer Portal
+Create Internship Drives
+Upload Job Descriptions
+AI Resume Ranking
+Candidate Shortlisting
+Search & Filters
+Analytics Dashboard
+Export Results (CSV/PDF)
+Manual Override
+🤖 AI Features
+Resume Parsing
+OCR Extraction
+Semantic JD Matching
+AI Recommendation Engine
+Skill Gap Detection
+AI Chat Assistant
+Voice Conversation
+Resume Summarization
+🧠 AI Workflow
+Resume Upload
+      │
+      ▼
+OCR + Resume Parsing
+      │
+      ▼
+Structured Candidate Profile
+      │
+      ▼
+Job Description Matching
+      │
+      ▼
+ATS Score Generation
+      │
+      ▼
+Eligibility %
+      │
+      ▼
+Candidate Ranking
+      │
+      ▼
+Placement Officer Dashboard
+🛠 Tech Stack
+Category	Technologies
+Frontend	React, TypeScript, Tailwind CSS, Vite
+Backend	Node.js, Express.js
+Database	Supabase
+AI	Google Gemini API
+OCR	Mistral OCR
+Speech	Sarvam AI STT & TTS
+Authentication	Supabase Auth
+Storage	Supabase Storage
+Deployment	Google AI Studio
+🏗 System Architecture
+Student
+    │
+    ▼
+Upload Resume
+    │
+    ▼
+OCR Service
+    │
+    ▼
+Gemini AI
+    │
+    ▼
+Resume Parser
+    │
+    ▼
+Embedding + Matching
+    │
+    ▼
+Ranking Engine
+    │
+    ▼
+Supabase Database
+    │
+    ▼
+Officer Dashboard
+📂 Project Structure
 smartscreen-ai/
-├── client/                     # React/Next.js frontend
-│   ├── src/
-│   │   ├── components/         # Reusable UI components (ResumeCard, RankingTable, etc.)
-│   │   ├── pages/               # Student portal, Admin dashboard, Login/Signup
-│   │   ├── services/            # API call wrappers (axios)
-│   │   └── context/              # Auth context, global state
-│   └── package.json
+
+├── client/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   └── assets/
 │
-├── server/                      # Node.js/Express backend
-│   ├── src/
-│   │   ├── routes/               # /auth, /resumes, /drives, /rankings
-│   │   ├── controllers/          # Business logic per route
-│   │   ├── models/                # Mongoose schemas (User, Resume, Drive, Score)
-│   │   ├── services/
-│   │   │   ├── resumeParser.js   # PDF/DOCX text extraction
-│   │   │   └── aiMatcher.js       # Gemini API integration + scoring
-│   │   ├── middleware/            # Auth guard, error handler, file upload (multer)
-│   │   └── config/                 # DB connection, env config
-│   ├── uploads/                    # Uploaded resumes (dev only)
-│   └── package.json
+├── server/
+│   ├── routes/
+│   ├── controllers/
+│   ├── services/
+│   ├── middleware/
+│   └── config/
 │
 ├── docs/
-│   ├── architecture-diagram.png
-│   ├── screenshots/
-│   └── demo-video-link.md
-│
-├── .env.example
-├── .gitignore
-└── README.md
+├── public/
+├── README.md
+└── package.json
+⚙ Installation
+git clone https://github.com/username/smartscreen-ai.git
 
-
-
-
-⚙️ Installation & Usage Guide
-Prerequisites
-Node.js ≥ 18.x
-MongoDB (local or Atlas URI)
-Gemini API key (Google AI Studio)
-1. Clone the repository
-bash
-git clone https://github.com/<your-org-or-username>/smartscreen-ai.git
 cd smartscreen-ai
-2. Backend setup
-bash
-cd server
+
 npm install
-cp .env.example .env
-# Fill in: MONGODB_URI, GEMINI_API_KEY, JWT_SECRET, PORT
+
 npm run dev
-3. Frontend setup
-bash
-cd ../client
-npm install
-npm run dev
-4. Access the app
-Frontend: http://localhost:3000
-Backend API: http://localhost:5000/api
-🔌 API Documentation
-Method	Endpoint	Description	Auth
-POST	/api/auth/register	Register student/admin	❌
-POST	/api/auth/login	Login, returns JWT	❌
-POST	/api/drives	Create new internship drive (JD, criteria)	Admin
-GET	/api/drives	List all active drives	✅
-POST	/api/resumes/upload	Upload resume for a drive	Student
-POST	/api/resumes/:id/parse	Trigger AI parsing + scoring	System/Admin
-GET	/api/drives/:id/rankings	Get ranked candidate list for a drive	Admin
-PATCH	/api/candidates/:id/status	Manually override shortlist/reject	Admin
-GET	/api/candidates/:id	Get full parsed resume + AI recommendation	Admin
-Database Schema (simplified)
+🔑 Environment Variables
+GEMINI_API_KEY=
 
+SUPABASE_URL=
 
+SUPABASE_ANON_KEY=
 
+SUPABASE_SERVICE_ROLE_KEY=
 
-User: { name, email, passwordHash, role: 'student' | 'admin' } Drive: { title, jobDescription, requiredSkills[], minCGPA, deadline, createdBy } Resume: { studentId, driveId, fileUrl, parsedData: { skills[], cgpa, education, projects[] } } Score: { resumeId, driveId, matchScore, recommendation, status: 'shortlisted' | 'rejected' | 'pending' }
+JWT_SECRET=
+📷 Screenshots
+Student Portal	Placement Dashboard
+Add Screenshot	Add Screenshot
+📊 Future Enhancements
+Resume OCR for scanned images
+Multi-language Resume Support
+Interview Scheduling
+LinkedIn Profile Integration
+AI Interview Preparation
+Bias Detection Dashboard
+Company Portal
+Email Notifications
+👥 Team
+Name	Role
+Team Lead	Backend & AI
+Member 2	Frontend
+Member 3	Database
+Member 4	UI/UX
+📄 License
 
-🤖 AI/ML Workflow
-Text Extraction — pdf-parse/mammoth converts uploaded resume to raw text.
-Structured Extraction Prompt — Raw text sent to Gemini with a prompt instructing it to return strict JSON (skills, CGPA, education, projects, experience).
-JD Embedding/Comparison — Job description keywords + required skills compared against extracted skills using semantic matching (Gemini reasoning or cosine similarity on embeddings).
-Scoring Formula (example, tune as needed):
-   score = (skill_match_% * 0.5) + (cgpa_fit * 0.2) + (project_relevance * 0.2) + (experience_bonus * 0.1)
-Recommendation Generation — Gemini generates a 1–2 line human-readable justification for the score (used by placement officers to sanity-check AI decisions).
-Threshold Application — Score ≥ drive's configured cutoff → Shortlisted; else Rejected (officer can override).
-🔐 Security Measures
-Passwords hashed with bcrypt; JWT-based session auth with expiry
-Role-based access control (student vs. admin routes protected via middleware)
-File upload validation (type/size limits, PDF/DOCX only) to prevent malicious uploads
-Environment variables for all secrets/API keys (.env, never committed)
-Input sanitization/validation on all API endpoints
-Rate limiting on auth and upload endpoints to prevent abuse
-🧪 Testing & Performance
-Manual testing of upload → parse → score → rank pipeline across sample resume sets
-Edge cases tested: corrupted files, non-English resumes, missing CGPA/education fields
-Load tested with [X] concurrent resume uploads — average parse+score time: [X] seconds/resume
-[Add unit/integration test framework used, e.g., Jest, and coverage % if available]
-🚧 Challenges Faced
-Handling inconsistent resume formats/layouts during text extraction
-Balancing AI scoring accuracy vs. false positives/negatives near the shortlist threshold
-Designing a scoring formula that's explainable to non-technical placement officers
-[Add your team's actual challenges]
-🔮 Future Scope
-Support for scanned/image-based resumes via OCR
-Interview scheduling integration for shortlisted candidates
-Bias/fairness audit dashboard for AI decisions
-Multi-language resume support
-Integration with LinkedIn/portfolio links for richer candidate profiles
-🖼️ Demo Screenshots
+This project was developed for a Hackathon and is intended for educational and demonstration purposes.
 
-Add screenshots in /docs/screenshots/ and embed them here:
-
-markdown
-
-![Student Portal](docs/screenshots/student-portal.png)
-![Admin Dashboard](docs/screenshots/admin-dashboard.png)
-![Ranking View](docs/screenshots/ranking-view.png)
-
-📚 References
-Google AI Studio / Gemini API Docs
+⭐ Why SmartScreen AI?
+🚀 AI-powered recruitment automation
+⚡ 10x faster resume screening
+📊 Intelligent candidate ranking
+🎯 Accurate JD matching
+📈 ATS score generation
+🗣️ Voice AI Assistant
+🔒 Secure authentication
+📱 Modern responsive UI
 MongoDB Documentation
 React Documentation
