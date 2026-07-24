@@ -2,16 +2,14 @@
 
 Automating campus internship screening with AI — from resume upload to ranked, shortlisted candidates in minutes, not hours.
 
-🔗 Live Demo: https://smartscreen-ai.ai.studio 📹 Demo Video: [Add YouTube/Drive link here] 📊 Presentation/Pitch (if any): [Add link here]
 
-👥 Team Details
 Role	Name	GitHub	Contribution
-Team Lead	[Name]	@github-handle	Backend + AI pipeline
-Member 2	[Name]	@github-handle	Frontend/UI
-Member 3	[Name]	@github-handle	Resume parsing/NLP
-Member 4	[Name]	@github-handle	Dashboard + Database
+Team Lead	[RANJITHKUMAR]	@github-handle	Backend + AI pipeline +V
+Member 2	[ROJA]	@github-handle	Frontend/UI
+Member 3	[MADHU MITHA]	@github-handle	Resume parsing/NLP
+Member 4	[Name]	@github-handle	C + Database
 
-Team Name: [Team Name] Hackathon/Event: [Event Name] Track: AI/Intelligent Automation
+ Track: AI/Intelligent Automation
 
 📌 Problem Statement
 
