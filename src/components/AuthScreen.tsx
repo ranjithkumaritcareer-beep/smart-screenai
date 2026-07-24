@@ -861,23 +861,6 @@ export default function AuthScreen({ type, initialMode = "login", onSuccess, onN
                 "Sign In"
               )}
             </button>
- 
-            {/* Quick Demo Bypass option for easier navigation */}
-            <div className="relative flex py-2 items-center">
-              <div className="flex-grow border-t border-white/5"></div>
-              <span className="flex-shrink mx-4 text-[9px] font-mono uppercase tracking-widest text-brand-text-muted/40">Or testing bypass</span>
-              <div className="flex-grow border-t border-white/5"></div>
-            </div>
- 
-            <button
-              type="button"
-              onClick={handleDemoSignIn}
-              disabled={isLoading}
-              className="w-full bg-white/5 hover:bg-white/10 text-brand-cyan border border-brand-cyan/20 py-2.5 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer transition-colors font-mono rounded-lg shadow-[0_0_15px_rgba(76,215,246,0.1)]"
-            >
-              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>Instant Demo Auto-SignIn</span>
-            </button>
           </form>
         ) : (
           /* CREATE ACCOUNT FORM */

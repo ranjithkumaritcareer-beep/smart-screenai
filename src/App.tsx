@@ -342,27 +342,20 @@ export default function App() {
     const isOfficerRoute = pathname.startsWith("/officer") || pathname === "/officer-login" || pathname === "/admin";
     const isResetRoute = pathname.includes("reset-password");
 
-    if (!session?.user) {
-      // Guest access to restricted dashboards
-      if (pathname === "/student/dashboard") {
-        navigate("/student-login");
-      } else if (pathname === "/officer/dashboard" || pathname === "/admin") {
-        navigate("/officer-login");
-      }
-    } else if (userRole) {
+    if (session?.user && userRole) {
       // Authenticated users with established role
       if (userRole === "student") {
-        // Locked to Student Portal: direct access to Officer routes redirects back to Student dashboard
+        // Locked to Student Portal: direct access to Officer routes redirects to Student dashboard
         if (isOfficerRoute) {
-          console.warn("Role Lock Enforcement: Student account cannot access Officer routes.");
+          console.warn("Role Lock Enforcement: Redirecting student to student dashboard.");
           navigate("/student/dashboard");
         } else if (pathname === "/student/login" || pathname === "/student-login") {
           navigate("/student/dashboard");
         }
       } else if (userRole === "officer") {
-        // Locked to Officer Console: direct access to Student routes redirects back to Officer dashboard
+        // Locked to Officer Console: direct access to Student routes redirects to Officer dashboard
         if (isStudentRoute) {
-          console.warn("Role Lock Enforcement: Officer account cannot access Student routes.");
+          console.warn("Role Lock Enforcement: Redirecting officer to officer dashboard.");
           navigate("/officer/dashboard");
         } else if (pathname === "/officer/login" || pathname === "/officer-login") {
           navigate("/officer/dashboard");
@@ -538,23 +531,40 @@ export default function App() {
         </div>
 
         {/* Dynamic header breadcrumb navigation & Sign Out */}
-        <div className="flex items-center gap-3 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
           {session ? (
             <div className="flex items-center gap-2">
-              <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-brand-text-muted/80 mr-1">
-                {pathname === "/officer/dashboard" && (
-                  <span className="flex items-center gap-1 text-[#4cd7f6] font-bold"><ShieldCheck className="w-3.5 h-3.5 text-brand-cyan animate-pulse" /> Placement Console</span>
-                )}
-                {pathname === "/student/dashboard" && (
-                  <span className="flex items-center gap-1 text-[#d0bcff] font-bold"><GraduationCap className="w-3.5 h-3.5 text-brand-purple" /> Student Workspace</span>
-                )}
-              </div>
-              
-              {pathname === "/" && (
+              {userRole === "student" ? (
                 <button
-                  id="header-go-to-dashboard-btn"
-                  onClick={() => navigate(userRole === "officer" ? "/officer/dashboard" : "/student/dashboard")}
-                  className="flex items-center gap-1.5 text-xs text-[#4cd7f6] border border-[#4cd7f6]/30 bg-[#4cd7f6]/10 hover:bg-[#4cd7f6]/20 px-3 py-1.5 rounded-lg font-medium font-mono uppercase tracking-wider transition-all cursor-pointer shadow-[0_0_10px_rgba(0,242,254,0.1)]"
+                  id="header-student-dashboard-btn"
+                  onClick={() => navigate("/student/dashboard")}
+                  className={`flex items-center gap-1.5 text-[11px] font-bold font-mono uppercase tracking-wider px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                    pathname === "/student/dashboard"
+                      ? "bg-brand-purple/30 text-white border-brand-purple/60 shadow-[0_0_12px_rgba(139,92,246,0.3)]"
+                      : "bg-brand-purple/10 text-brand-purple border-brand-purple/30 hover:bg-brand-purple/20"
+                  }`}
+                >
+                  <GraduationCap className="w-3.5 h-3.5 text-brand-purple" />
+                  <span>Student Workspace</span>
+                </button>
+              ) : userRole === "officer" ? (
+                <button
+                  id="header-officer-dashboard-btn"
+                  onClick={() => navigate("/officer/dashboard")}
+                  className={`flex items-center gap-1.5 text-[11px] font-bold font-mono uppercase tracking-wider px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
+                    pathname === "/officer/dashboard"
+                      ? "bg-[#00D9C0]/30 text-white border-[#00D9C0]/60 shadow-[0_0_12px_rgba(0,217,192,0.3)]"
+                      : "bg-[#00D9C0]/10 text-[#00D9C0] border-[#00D9C0]/30 hover:bg-[#00D9C0]/20"
+                  }`}
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#00D9C0]" />
+                  <span>Officer Console</span>
+                </button>
+              ) : (
+                <button
+                  id="header-dashboard-btn"
+                  onClick={() => navigate("/")}
+                  className="flex items-center gap-1.5 text-xs text-[#00D9C0] border border-[#00D9C0]/30 bg-[#00D9C0]/10 hover:bg-[#00D9C0]/20 px-3 py-1.5 rounded-lg font-medium font-mono uppercase tracking-wider transition-all cursor-pointer"
                 >
                   Dashboard &rarr;
                 </button>
@@ -563,26 +573,26 @@ export default function App() {
           ) : (
             <div className="flex items-center gap-1.5 md:gap-2">
               <button
-                id="header-student-portal-btn"
-                onClick={() => navigate("/student/login")}
-                className={`text-[10px] font-semibold font-mono uppercase tracking-wider p-1.5 px-2.5 md:px-3.5 rounded-lg border transition-all cursor-pointer ${
-                  pathname.startsWith("/student")
-                    ? "bg-brand-purple/20 text-white border-brand-purple/40 shadow-[0_0_10px_rgba(139,92,246,0.2)]"
-                    : "text-brand-text-muted hover:text-white hover:bg-white/5 border-white/5"
+                id="header-student-login-btn"
+                onClick={() => navigate("/student-login")}
+                className={`text-[10px] font-semibold font-mono uppercase tracking-wider p-1.5 px-2.5 md:px-3 rounded-lg border transition-all cursor-pointer ${
+                  pathname === "/student-login" || pathname === "/student/login"
+                    ? "bg-brand-purple/30 text-white border-brand-purple/60 shadow-[0_0_10px_rgba(139,92,246,0.3)]"
+                    : "bg-brand-purple/10 text-brand-purple border-brand-purple/30 hover:bg-brand-purple/20"
                 }`}
               >
-                Student Portal
+                Student Login
               </button>
               <button
-                id="header-officer-portal-btn"
-                onClick={() => navigate("/officer/login")}
-                className={`text-[10px] font-semibold font-mono uppercase tracking-wider p-1.5 px-2.5 md:px-3.5 rounded-lg border transition-all cursor-pointer ${
-                  pathname.startsWith("/officer")
-                    ? "bg-brand-cyan/20 text-brand-cyan border-brand-cyan/40 shadow-[0_0_10px_rgba(0,242,254,0.2)]"
-                    : "text-brand-text-muted hover:text-white hover:bg-white/5 border-white/5"
+                id="header-officer-login-btn"
+                onClick={() => navigate("/officer-login")}
+                className={`text-[10px] font-semibold font-mono uppercase tracking-wider p-1.5 px-2.5 md:px-3 rounded-lg border transition-all cursor-pointer ${
+                  pathname === "/officer-login" || pathname === "/officer/login"
+                    ? "bg-[#00D9C0]/30 text-white border-[#00D9C0]/60 shadow-[0_0_10px_rgba(0,217,192,0.3)]"
+                    : "bg-[#00D9C0]/10 text-[#00D9C0] border-[#00D9C0]/30 hover:bg-[#00D9C0]/20"
                 }`}
               >
-                Officer Portal
+                Officer Login
               </button>
             </div>
           )}
@@ -622,9 +632,11 @@ export default function App() {
                 candidates={candidates}
                 evaluations={evaluations}
                 onNavigate={(view) => {
-                  if (view === "admin") navigate("/officer/login");
-                  else if (view === "student") navigate("/student/login");
-                  else navigate("/");
+                  if (view === "admin" || view === "officer") navigate("/officer/dashboard");
+                  else if (view === "student") navigate("/student/dashboard");
+                  else if (view === "officer-login" || view === "officer/login") navigate("/officer-login");
+                  else if (view === "student-login" || view === "student/login") navigate("/student-login");
+                  else navigate(view.startsWith("/") ? view : "/");
                 }}
               />
             )}
@@ -665,7 +677,7 @@ export default function App() {
               />
             )}
 
-            {pathname === "/student/dashboard" && (
+            {(pathname === "/student/dashboard" || pathname === "/student" || pathname === "/student-dashboard") && (
               <StudentPortal
                 jobs={jobs}
                 onAddEvaluation={handleAddEvaluation}
@@ -675,7 +687,7 @@ export default function App() {
               />
             )}
 
-            {pathname === "/officer/dashboard" && (
+            {(pathname === "/officer/dashboard" || pathname === "/officer" || pathname === "/admin" || pathname === "/officer-dashboard") && (
               <OfficerConsole
                 jobs={jobs}
                 candidates={candidates}
