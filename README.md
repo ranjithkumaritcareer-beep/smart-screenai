@@ -78,6 +78,9 @@ Ranking — All candidates for a drive are sorted by score; those above the conf
 Review — Placement officer views the ranked list on the dashboard, can open any resume, see the AI's reasoning, and override any decision manually.
 Notification — Students see their updated status (Shortlisted/Rejected/Under Review) on their portal.
 📁 Folder Structure
+
+
+
 smartscreen-ai/
 ├── client/                     # React/Next.js frontend
 │   ├── src/
@@ -108,6 +111,10 @@ smartscreen-ai/
 ├── .env.example
 ├── .gitignore
 └── README.md
+
+
+
+
 ⚙️ Installation & Usage Guide
 Prerequisites
 Node.js ≥ 18.x
@@ -144,6 +151,9 @@ GET	/api/drives/:id/rankings	Get ranked candidate list for a drive	Admin
 PATCH	/api/candidates/:id/status	Manually override shortlist/reject	Admin
 GET	/api/candidates/:id	Get full parsed resume + AI recommendation	Admin
 Database Schema (simplified)
+
+
+
 
 User: { name, email, passwordHash, role: 'student' | 'admin' } Drive: { title, jobDescription, requiredSkills[], minCGPA, deadline, createdBy } Resume: { studentId, driveId, fileUrl, parsedData: { skills[], cgpa, education, projects[] } } Score: { resumeId, driveId, matchScore, recommendation, status: 'shortlisted' | 'rejected' | 'pending' }
 
@@ -183,9 +193,11 @@ Integration with LinkedIn/portfolio links for richer candidate profiles
 Add screenshots in /docs/screenshots/ and embed them here:
 
 markdown
+
 ![Student Portal](docs/screenshots/student-portal.png)
 ![Admin Dashboard](docs/screenshots/admin-dashboard.png)
 ![Ranking View](docs/screenshots/ranking-view.png)
+
 📚 References
 Google AI Studio / Gemini API Docs
 MongoDB Documentation
