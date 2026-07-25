@@ -130,11 +130,11 @@ npm run dev
 
 ## 👥 Team — Code Titans
 
-| Name | Role |
-|---|---|
-|Ranjithkumar M|  |Data base |
-|Roja VM |  |Backend|
-|Madhu mitha B|  |Frontend|
+| Name | 
+|---|
+|Ranjithkumar M|  
+|Roja VM | 
+|Madhu mitha B|  
 
 ---
 
