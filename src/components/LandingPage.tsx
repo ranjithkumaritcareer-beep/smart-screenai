@@ -24,7 +24,11 @@ import {
   UserCheck,
   Layers,
   Search,
-  ExternalLink
+  ExternalLink,
+  Cpu,
+  Server,
+  Mic,
+  Volume2
 } from "lucide-react";
 import { JobPosting, CandidateProfile, AIEvaluation } from "../types";
 import { supabase } from "../lib/supabaseClient";
