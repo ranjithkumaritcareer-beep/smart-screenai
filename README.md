@@ -132,8 +132,9 @@ npm run dev
 
 | Name | Role |
 |---|---|
-| *Add your name* | *Add your role* |
-| *Add teammate* | *Add their role* |
+|Ranjithkumar M| 
+|Roja VM | 
+|Madhu mitha B|
 
 ---
 
