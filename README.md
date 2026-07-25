@@ -132,9 +132,9 @@ npm run dev
 
 | Name | Role |
 |---|---|
-|Ranjithkumar M||Data base |
-|Roja VM ||Backend|
-|Madhu mitha B||Frontend|
+|Ranjithkumar M|  |Data base |
+|Roja VM |  |Backend|
+|Madhu mitha B|  |Frontend|
 
 ---
 
